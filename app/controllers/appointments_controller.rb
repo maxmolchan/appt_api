@@ -3,6 +3,11 @@ class AppointmentsController < ApplicationController
     @appointments = Appointment.filter_by_date(params[:start], params[:end])
     render json: @appointments
   end
+  
+  def list
+    @appointments = Appointment.filter_by_date(params[:start], params[:end])
+    render json: @appointments
+  end
 
   def create
     @appointment = Appointment.new(params[:appointment])
