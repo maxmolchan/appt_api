@@ -20,7 +20,8 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.find(params[:id])
 
     if @appointment.update_attributes(params[:appointment])
-      head :no_content
+      @appointments = Appointment.all
+      render json: @appointments
     else
       render json: { :errors => 'Not found'.as_json }, status: 402
     end
