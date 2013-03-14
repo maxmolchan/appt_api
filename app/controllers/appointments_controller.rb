@@ -1,7 +1,7 @@
 class AppointmentsController < ApplicationController
   def index
     @appointments = Appointment.filter_by_date(params[:start], params[:end])
-          
+
     render json: @appointments
   end
 
@@ -21,7 +21,7 @@ class AppointmentsController < ApplicationController
 
     if @appointment.update_attributes(params[:appointment])
       @appointments = Appointment.all
-      render json: @appointments
+      render json: @appointments, status: :updated, location: @appointment
     else
       render json: { :errors => 'Not found'.as_json }, status: 402
     end
