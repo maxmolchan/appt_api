@@ -22,7 +22,7 @@ class AppointmentsController < ApplicationController
     if @appointment.update_attributes(params[:appointment])
       head :no_content
     else
-      render json: @appointment.errors, status: :unprocessable_entity
+      render json: { :errors => 'Not found'.as_json }, status: 402
     end
   end
 
