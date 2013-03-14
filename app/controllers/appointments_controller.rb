@@ -1,7 +1,6 @@
 class AppointmentsController < ApplicationController
+  
   def index
-    @appointments = Appointment.all
-    render json: @appointments, status: 200, location: @appointment
   end
   
   def list
@@ -24,8 +23,7 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.find(params[:id])
 
     if @appointment.update_attributes(params[:appointment])
-      @appointments = Appointment.all
-      render json: @appointments, status: 200, location: @appointment
+      render json: @appointment, status: 200, location: @appointment
     else
       render json: { :errors => 'Error while updating'.as_json }, status: 402
     end
