@@ -7,10 +7,6 @@ describe AppointmentsController do
       get("/appointments").should route_to("appointments#index")
     end
 
-    it "routes to #show" do
-      get("/appointments/1").should route_to("appointments#show", :id => "1")
-    end
-
     it "routes to #create" do
       post("/appointments").should route_to("appointments#create")
     end
@@ -21,6 +17,10 @@ describe AppointmentsController do
 
     it "routes to #destroy" do
       delete("/appointments/1").should route_to("appointments#destroy", :id => "1")
+    end
+    
+    it "route to #list" do
+      get("/list").should route_to("appointments#list")
     end
 
   end
