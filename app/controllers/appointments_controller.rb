@@ -25,7 +25,7 @@ class AppointmentsController < ApplicationController
     if @appointment.update_attributes(params[:appointment])
       render json: @appointment, status: 200, location: @appointment
     else
-      render json: { :errors => 'Error while updating'.as_json }, status: 402
+      render json: { :errors => 'Error while updating'.as_json }, status: :unprocessable_entity
     end
   end
 
@@ -34,6 +34,6 @@ class AppointmentsController < ApplicationController
     @appointment.destroy
 
     @appointments = Appointment.all
-    render json: @appointments
+    render json: @appointments, status: 200, location: @appointment
   end
 end
