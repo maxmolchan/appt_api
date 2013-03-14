@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>CC Appointments</title>
+		<style type="text/css" media="screen">
+			html, body {
+				background-color: gray;
+				font-family: Verdana, Helvetica, Arial;
+				font-size: 14px;
+			}
+
+			a {
+				color: #0000FF;
+			}
+
+			#container {
+				width: 75%;
+				margin: 0 auto;
+				background-color: #FFF;
+				padding: 20px 40px;
+				border: solid 1px black;
+				margin-top: 20px;
+			}
+			
+			#appt_list{
+				font-size: 10px;
+			}
+		</style>
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+
+        <script type="text/javascript" charset="utf-8">
+			$(document).ready(function() {
+				$.ajax({
+					type : "GET",
+					url : "http://localhost:3000/appointments",
+					dataType : "json",
+					success : function(data) {
+						for (var i = 0; i < data.length; i++) {
+						content = '<p>' + data[i].appointment.first_name+ ' ';
+						content += data[i].appointment.last_name + '  ------  ';
+						content += 'Appointment starts at: '+ data[i].appointment.start_time + '  ------  '; 
+						content += 'Appointment ends at: '+ data[i].appointment.end_time; 
+						content += '<br/>';
+						$(content).appendTo("#appt_list");
+						}
+					}
+				});
+			});
+		</script>
+
+
+
+	</head>
+	<body>
+		<div id="container">
+			<h1>Appointments APIs</h1>
+			<div id="appt_list"></div>
+		</div>
+	</body>
+</html>
