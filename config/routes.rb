@@ -1,5 +1,7 @@
 ApptApi::Application.routes.draw do
-  resources :appointments, except: :edit
+  resources :appointments, except: :edit 
+  match 'list' => 'appointments#list'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

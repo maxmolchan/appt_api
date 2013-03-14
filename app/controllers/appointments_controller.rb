@@ -1,12 +1,12 @@
 class AppointmentsController < ApplicationController
   def index
-    @appointments = Appointment.filter_by_date(params[:start], params[:end])
+    @appointments = Appointment.all
     render json: @appointments, status: 200, location: @appointment
   end
   
   def list
     @appointments = Appointment.filter_by_date(params[:start], params[:end])
-    render json: @appointments
+    render json: @appointments, status: 200, location: @appointment
   end
 
   def create
