@@ -4,7 +4,7 @@ class AppointmentsController < ApplicationController
     @appointments = Appointment.all
     render json: @appointments, status: 200, location: @appointment
   end
-  
+
   def list
     @appointments = Appointment.filter_by_date(params[:start], params[:end])
     render json: @appointments, status: 200, location: @appointment
@@ -15,16 +15,18 @@ class AppointmentsController < ApplicationController
 
     if @appointment.dates_valid?(params[:appointment][:start_time], params[:appointment][:end_time])
       @appointment.save
-      render json: @appointment, status: :created, location: @appointment
+      @appointments = Appointment.all
+      render json: @appointments, status: 200, location: @appointment
     else
-      render json: { :errors => 'Errors with dates'.as_json }, status: :unprocessable_entity
+      render json: { :errors => 'Dates are not valid'.as_json }, status: 422
     end
   end
-
+ 
   def update
     @appointment = Appointment.find(params[:id])
 
-    if @appointment.update_attributes(params[:appointment])
+    if @appointment.dates_valid?(params[:appointment][:start_time], params[:appointment][:end_time])
+      @appointment.update_attributes(params[:appointment])
       @appointments = Appointment.all
       render json: @appointments, status: 200, location: @appointment
     else

@@ -2,21 +2,22 @@ class Appointment < ActiveRecord::Base
 
   attr_accessible :comments, :end_time, :first_name, :last_name, :start_time
   
-  def self.filter_by_date(s,e)
- 
-  if s && e && e > s
-     where("start_time >= ? AND end_time <= ?", s.to_datetime, e.to_datetime)
-  elsif s
-     where("start_time >= ?", s.to_datetime)
-  elsif e
-     where("start_time <= ?", e.to_datetime)
-  else
-     all
-  end
-    
-  end
-    
   
+  def self.filter_by_date(s,e)
+
+    if s && e && e > s
+      where("start_time >= ? AND end_time <= ?", s.to_datetime, e.to_datetime)
+    elsif s
+      where("start_time >= ?", s.to_datetime)
+    elsif e
+      where("start_time <= ?", e.to_datetime)
+    else
+      all
+    end
+
+  end
+
+
   def dates_valid?(s,e)
 
     datetime_now = DateTime.now
@@ -37,6 +38,7 @@ class Appointment < ActiveRecord::Base
           end
 
         end
+      
       else
       valid = false
       end

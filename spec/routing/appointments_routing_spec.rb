@@ -7,16 +7,8 @@ describe AppointmentsController do
       get("/appointments").should route_to("appointments#index")
     end
 
-    it "routes to #new" do
-      get("/appointments/new").should route_to("appointments#new")
-    end
-
     it "routes to #show" do
       get("/appointments/1").should route_to("appointments#show", :id => "1")
-    end
-
-    it "routes to #edit" do
-      get("/appointments/1/edit").should route_to("appointments#edit", :id => "1")
     end
 
     it "routes to #create" do
