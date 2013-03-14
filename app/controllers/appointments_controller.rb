@@ -21,9 +21,9 @@ class AppointmentsController < ApplicationController
 
     if @appointment.update_attributes(params[:appointment])
       @appointments = Appointment.all
-      render json: @appointments, status: :updated, location: @appointment
+      render json: @appointments, status: 200, location: @appointment
     else
-      render json: { :errors => 'Not found'.as_json }, status: 402
+      render json: { :errors => 'error'.as_json }, status: 402
     end
   end
 
