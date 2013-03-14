@@ -14,3 +14,12 @@ group :test do
   gem "capybara"
   gem "guard-rspec"
 end
+
+
+group :development, :test do
+  gem 'sqlite3'
+end
+
+group :production do
+  gem 'pg'
+end
